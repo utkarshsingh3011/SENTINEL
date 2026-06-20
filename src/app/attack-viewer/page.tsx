@@ -3,9 +3,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { saveCampaignToHistory } from "../../components/campaignStore";
 import { 
   Play, Pause, RotateCcw, ArrowLeft, Terminal, 
-  Activity, ShieldCheck
+  Activity, ShieldCheck, Brain
 } from "lucide-react";
 
 interface CampaignStage {
@@ -146,7 +147,9 @@ export default function AttackViewerPage() {
         const saved = sessionStorage.getItem("aegis_campaign_config");
         if (saved) {
           try {
-            setCampaign(JSON.parse(saved));
+            const parsed = JSON.parse(saved);
+            setCampaign(parsed);
+            saveCampaignToHistory(parsed);
             return;
           } catch {
             // fallback
@@ -154,6 +157,7 @@ export default function AttackViewerPage() {
         }
       }
       setCampaign(FALLBACK_CAMPAIGN);
+      saveCampaignToHistory(FALLBACK_CAMPAIGN);
     };
 
     const timer = setTimeout(loadCampaign, 50);
@@ -349,13 +353,22 @@ export default function AttackViewerPage() {
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full flex-grow">
         
         {/* Navigation Link */}
-        <Link 
-          href="/simulate" 
-          className="inline-flex items-center gap-2 text-[10px] font-mono tracking-widest text-slate-400 hover:text-white uppercase mb-8 transition-colors group"
-        >
-          <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-          Simulation Setup
-        </Link>
+        <div className="flex justify-between items-center mb-8 flex-wrap gap-4">
+          <Link 
+            href="/simulate" 
+            className="inline-flex items-center gap-2 text-[10px] font-mono tracking-widest text-slate-400 hover:text-white uppercase transition-colors group"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+            Simulation Setup
+          </Link>
+          <Link
+            href="/command-center"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-cyber-cyan/30 bg-cyber-cyan/10 text-cyber-cyan hover:bg-cyber-cyan/20 text-[10px] font-mono tracking-widest uppercase transition-all duration-300 hover:shadow-[0_0_15px_rgba(6,182,212,0.25)] hover:border-cyber-cyan/60"
+          >
+            <Activity className="w-3.5 h-3.5 animate-pulse" />
+            Open Command Center
+          </Link>
+        </div>
 
         {/* Global Progress and Playback Control bar */}
         <div className="glassmorphism-card rounded-xl p-4 border border-cyber-border mb-8 flex flex-wrap items-center justify-between gap-4">
@@ -383,16 +396,37 @@ export default function AttackViewerPage() {
             </span>
           </div>
 
-          {/* Progress Bar */}
-          <div className="flex-grow max-w-md flex items-center gap-4">
-            <span className="text-[10px] font-mono text-slate-400">COMPLETION: {progress}%</span>
-            <div className="flex-grow h-2 bg-slate-950 border border-cyber-border rounded-full overflow-hidden">
+          {/* Progress Bar or AI Analyst Action */}
+          <div className="flex items-center gap-4">
+            {progress === 100 ? (
               <motion.div
-                className="h-full bg-gradient-to-r from-electric-blue to-cyber-cyan"
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.2 }}
-              />
-            </div>
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="flex items-center gap-4 flex-wrap"
+              >
+                <span className="text-[10px] font-mono text-cyber-green font-bold uppercase tracking-wider hidden sm:inline">
+                  [TELEMETRY RECORDED]
+                </span>
+                <Link
+                  href="/ai-analyst"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded bg-electric-blue border border-electric-blue/50 text-xs font-mono font-bold tracking-widest text-white uppercase hover:bg-blue-600 hover:shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all duration-300 animate-pulse cursor-pointer"
+                >
+                  <Brain className="w-3.5 h-3.5 text-cyber-cyan" />
+                  Analyze with AI Analyst
+                </Link>
+              </motion.div>
+            ) : (
+              <>
+                <span className="text-[10px] font-mono text-slate-400">COMPLETION: {progress}%</span>
+                <div className="w-48 sm:w-64 h-2 bg-slate-950 border border-cyber-border rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-electric-blue to-cyber-cyan"
+                    animate={{ width: `${progress}%` }}
+                    transition={{ duration: 0.2 }}
+                  />
+                </div>
+              </>
+            )}
           </div>
         </div>
 
