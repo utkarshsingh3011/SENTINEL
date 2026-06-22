@@ -216,7 +216,7 @@ export default function Home() {
               </Link>
 
               <a
-                href="https://github.com/utkarshsingh3011/Sentinel-ai-cyber-simulator"
+                href="https://github.com/utkarshsingh3011/SENTINEL"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-cyber-cyan transition-colors"
