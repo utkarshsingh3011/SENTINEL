@@ -1,115 +1,177 @@
-# 🛡️ AEGIS: AI-Powered Cyber Threat Simulation & Defense Platform
+# 🛡️ AEGIS
 
-AEGIS is an immersive, educational cybersecurity digital twin and threat emulation platform. It allows students, recruiters, and security enthusiasts to configure, simulate, and analyze advanced persistent threat (APT) campaigns inside a clean, visual digital twin environment. By mapping threat propagation to the MITRE ATT&CK matrix, AEGIS generates live simulation playbacks, reports real-time security posture metrics, and synthesizes Cyber Threat Intelligence (CTI) mitigation playbooks.
+### Understanding Cyber Attacks Through Simulation
 
----
+AEGIS is an interactive cybersecurity simulation platform designed to make complex cyber attacks easier to understand.
 
-## 🚀 Key Features
+Most people learn cybersecurity through diagrams, slides, and theory. AEGIS takes a different approach.
 
-*   **🎬 Intrusion Playback Player & Timeline**: Watch deterministic, multi-stage cyber campaigns unfold across network topologies. Stream live EDR events, LSASS credential dumps, and lateral subnet logs in real-time.
-*   **🎛️ Simulation Studio**: Customize parameters like targeted industries (Healthcare, Banking, Government, University, Startup), adversarial actors (APT29, Lazarus, LockBit, FIN7, Anonymous), intrusion vectors (Phishing, SQLi, DDoS, Supply Chain, Ransomware), and zero-trust security profiles.
-*   **📊 SOC Command Center**: An operations dashboard reporting a dynamic Security Posture Index, threat volume metrics, targeted industry heatmaps, MITRE ATT&CK mitigation coverages, and historical telemetry tables.
-*   **🧠 AI Threat Analyst Console**: Synthesizes highly structured, realistic Cyber Threat Intelligence (CTI) briefs. Includes 30-second executive summaries, business impact assessments (downtime & financial liabilities), mitigation playbooks, and quantitative risk-reduction gauges.
-*   **📝 Telemetry Exporters**: Support for exporting complete CTI reports as clean Markdown briefs or triggering print-ready SOC paper copies.
+Instead of reading about phishing, ransomware, credential theft, or lateral movement, users can step into a simulated environment, launch attack scenarios, analyze the results, and explore how defensive decisions affect outcomes.
 
----
+The objective is simple:
 
-## 📐 System Architecture
-
-The following diagram illustrates how simulation parameters propagate through the AEGIS compiler, populate execution timelines, record telemetry, and feed analytical consoles:
-
-```mermaid
-graph TD
-    A["Simulation Studio UI"] -- "Select Parameters (Industry, Actor, Vector, Security)" --> B["Config Compiler (compileCampaignConfig)"]
-    B -- "Create Campaign Config" --> C["Session Storage (aegis_campaign_config)"]
-    C --> D["Attack Movie Timeline & Player (/attack-viewer)"]
-    D -- "On Mount / Start" --> E["Telemetry Logger (saveCampaignToHistory)"]
-    E -- "Append & Sync" --> F["localStorage Database"]
-    
-    F --> G["SOC Command Center (/command-center)"]
-    F --> H["AI Threat Analyst (/ai-analyst)"]
-    
-    G -- "1. Posture Index" --> G1["Animated circular gauge (100 - Avg Risk)"]
-    G -- "2. Mitigation Matrix" --> G2["MITRE ATT&CK Block Rate Tracker"]
-    G -- "3. Heatmap" --> G3["Targeted Industry distribution bar chart"]
-    
-    H -- "Adversary TTP Mapping" --> H1["CTI Report Brief (Markdown & Print)"]
-    H -- "Risk Projection" --> H2["Post-mitigation Risk Reduction Index"]
-```
+**Make cybersecurity visual, interactive, and approachable.**
 
 ---
 
-## 🛠️ Tech Stack
+## Why AEGIS Exists
 
-AEGIS is built using a modern, performant frontend stack optimized for cinematic micro-interactions:
+When I started learning cybersecurity, I noticed that most educational resources focused on explaining attacks rather than helping people truly understand them.
 
-*   **Core Framework**: Next.js v16.2.9 & React 19 (App Router)
-*   **Styling & Design System**: Tailwind CSS v4 & custom utility styles (CRT scanline sweeps, digital twin grid meshes, glassmorphism templates)
-*   **Animations**: Framer Motion (smooth state transitions, circular gauges, and timeline expansions)
-*   **Icons**: Lucide React
-*   **Language**: TypeScript (strict type safety for configuration payloads)
+Terms like:
 
----
+* Spearphishing
+* Initial Access
+* Privilege Escalation
+* Data Exfiltration
+* MITRE ATT&CK
 
-## 📊 MITRE ATT&CK Mapping Matrix
+often felt disconnected from what actually happens during an attack.
 
-AEGIS simulations map cyber kill chains directly to corporate threat vectors, tracking detection and block rates for these core techniques:
+AEGIS was built to bridge that gap.
 
-| Intrusion Phase | MITRE ID | Technique Name | Defense Focus / Countermeasure |
-| :--- | :--- | :--- | :--- |
-| **Reconnaissance** | `T1595` / `T1046` | Active Scanning / Port Scans | Boundary Firewalls & Rate-Limiting |
-| **Initial Access** | `T1566.002` | Spearphishing Link | Heuristic Email Sandbox / FIDO2 MFA |
-| **Initial Access** | `T1195.002` | Supply Chain Compromise | Dependency check-sum pinning & scanners |
-| **Initial Access** | `T1190` | Exploit Public-Facing App | Web Application Firewall (WAF) |
-| **Credential Access** | `T1003.001` | LSASS Memory Dumping | Windows Host Credential Guard |
-| **Lateral Movement**| `T1021` | Remote Services (RDP/SSH) | Active Directory Session Limits |
-| **Privilege Escalation**| `T1134` | Access Token Manipulation | Principle of Least Privilege |
-| **Exfiltration** | `T1041` | Exfiltration Over C2 | Egress Port Filtering & DNS inspection |
-| **Impact** | `T1486` | Data Encrypted for Impact | Immutable WORM Backups |
-| **Impact** | `T1498.001` | Volumetric DDoS Flood | Global Edge Scrubbers |
+It transforms cyber attack concepts into an experience where users can see how attacks unfold, why defenses fail, and what security teams can do differently.
 
 ---
 
-## 📥 Installation & Setup
+## What You Can Do
 
-Verify that you have [Node.js](https://nodejs.org) installed, then execute the following console commands:
+### Build Attack Scenarios
 
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/utkarshsingh3011/AEGIS-ai-cyber-simulator.git
-    cd AEGIS-ai-cyber-simulator
-    ```
+Choose a target environment, attacker profile, attack technique, and security configuration.
 
-2.  **Install dependencies**:
-    ```bash
-    npm install
-    ```
-
-3.  **Run the local development server**:
-    ```bash
-    npm run dev
-    ```
-
-4.  **Open the interface**:
-    Navigate to `http://localhost:3000` inside your browser to start the console.
-
-5.  **Compile production bundle**:
-    ```bash
-    npm run build
-    ```
+Watch how different combinations produce different outcomes.
 
 ---
 
-## 🗺️ Future Roadmap
+### Explore Security Reports
 
-*   🤖 **Gemini AI scenario generator**: Connect a live Gemini API endpoint to dynamically synthesize custom adversary logs, bypass codes, and complex CTI playbook text based on unstructured user requests.
-*   📡 **SIEM Webhook Connector**: Stream simulated attack logs over Syslog or HTTP POST endpoints to live SIEM tools like Splunk or Elastic Stack.
-*   🔏 **Infrastructure-as-Code Playbooks**: Generate downloadable Terraform scripts to automatically deploy the recommended mitigations on AWS, GCP, or Azure.
+Every simulation generates a detailed analyst-style report containing:
+
+* Executive summaries
+* Threat profiles
+* Attack progression
+* Risk assessments
+* Business impact estimates
+* Defensive recommendations
 
 ---
 
-## 💡 Why I Built This
+### Visualize Security Posture
 
-Cybersecurity threats are fast, invisible, and highly complex. Most defense simulations exist only as static text print-outs or dry tabular audits. **AEGIS** was built to bridge the gap between cybersecurity and interactive visualization. By turning abstract adversarial campaigns into structured, cinematic movies, AEGIS makes it easy to understand the mechanics of lateral movement, privilege escalation, and zero-trust defense architectures. 
+AEGIS tracks historical simulation outcomes and converts them into actionable metrics.
 
-It is designed to educate security operators, engage executives, and pave the way for automated AI-driven defenses.
+Users can review:
+
+* Security scores
+* Attack success rates
+* Vulnerable attack techniques
+* Defensive coverage
+* Industry targeting trends
+
+---
+
+### Learn Through Experimentation
+
+The platform encourages curiosity.
+
+What happens when defenses are weak?
+
+What changes when security controls improve?
+
+How does ransomware differ from phishing?
+
+How much damage can a successful attack cause?
+
+Instead of reading answers, users discover them.
+
+---
+
+## Platform Preview
+
+### Landing Experience
+
+![Landing Page](public/landing-page.png)
+
+---
+
+### Attack Simulation Builder
+
+![Simulation Builder](public/simulation-builder.png)
+
+---
+
+### AI Security Analyst Console
+
+![AI Analyst](public/ai-analyst.png)
+
+---
+
+### Security Insights Dashboard
+
+![Security Dashboard](public/security-dashboard.png)
+
+---
+
+## Built With
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* Framer Motion
+* Vercel
+
+---
+
+## What I Learned
+
+Building AEGIS challenged me far beyond writing code.
+
+It pushed me to think about:
+
+* User experience
+* Cybersecurity storytelling
+* System design
+* Technical communication
+* Interface design
+* Performance optimization
+* Security education
+
+The most interesting part wasn't building the simulator.
+
+It was figuring out how to make cybersecurity understandable for someone seeing these concepts for the first time.
+
+---
+
+## Future Vision
+
+AEGIS is currently focused on cybersecurity education.
+
+Future versions may include:
+
+* AI-generated attack scenarios
+* Interactive attack timelines
+* Team-based simulations
+* Threat intelligence integration
+* Custom report generation
+* PDF exports
+* Scenario sharing
+
+The long-term goal is to evolve AEGIS into a complete cybersecurity learning experience that combines simulation, visualization, and AI-assisted analysis.
+
+---
+
+## About The Developer
+
+Hi, I'm **Utkarsh Singh**.
+
+I'm an Electronics & Communication Engineering student at JIIT Noida with a growing interest in cybersecurity, software development, and building products that make technical concepts easier to understand.
+
+AEGIS represents my effort to combine those interests into a single project.
+
+If you found the project interesting, feel free to connect, provide feedback, or contribute ideas.
+
+---
+
+⭐ If you enjoyed exploring AEGIS, consider starring the repository.
