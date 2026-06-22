@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SENTINEL | Cyber Attack Simulation Platform",
+  title: "Sentinel | Cyber Attack Simulation Platform",
   description: "Visualize, simulate, and defend against advanced persistent threats in a cinematic digital twin environment. Sentinel maps threat campaigns to MITRE ATT&CK and generates predictive playbooks before they impact your network.",
   keywords: ["cybersecurity", "AI simulation", "cyber warfare", "digital twin", "threat modeling", "MITRE ATT&CK", "automated defense"],
   authors: [{ name: "Sentinel Engineering" }],
   openGraph: {
-    title: "SENTINEL | Cyber Attack Simulation Platform",
+    title: "Sentinel | Cyber Attack Simulation Platform",
     description: "Visualize and simulate advanced cyber threats before they strike.",
     type: "website",
   },
