@@ -28,7 +28,7 @@ Rather than reading about phishing, credential theft, or ransomware, users exper
 
 <img src="./public/simulation-builder.png" width="100%">
 
-## AI Investigation
+## Attack Storyboard
 
 <img src="./public/attack-storyboard.png" width="100%">
 
